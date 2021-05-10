@@ -1,0 +1,33 @@
+---
+- hosts: servers_prometheus
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+    - name: Create folder prometheus-config
+      file:
+        path: /root/prometheus-config
+        owner: root
+        group: root
+        state: directory
+
+    - name: Create folder prometheus-data
+      file:
+        path: /root/prometheus-data
+        owner: root
+        group: root
+        mode: 0777
+        state: directory
+
+    - name: Copy prometheus config template
+      copy:
+        src: template/prometheus.yml
+        dest: /root/prometheus-config
+
+    - name: Run container prometheus
+      become: true
+      become_user: root
+      shell: docker run -d -p 9090:9090 -v /root/prometheus-config/prometheus.yml:/etc/prometheus/prometheus.yml -v /root/prometheus-data:/prometheus prom/prometheus

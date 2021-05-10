@@ -1,0 +1,7 @@
+--- 
+containers: 2
+container_name: docker_ubuntu
+container_image: ubuntu:18.04
+container_command: sleep 1d
+node_exporter_version: 1.1.2
+go_arch: amd64
