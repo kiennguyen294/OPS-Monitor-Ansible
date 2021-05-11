@@ -1,5 +1,5 @@
 ---
-- hosts: servers_prometheus
+- hosts: server_node_exporter
   become: true
   vars_files:
     - vars/default.yml
@@ -22,6 +22,44 @@
       unarchive:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+        #creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+        remote_src: yes
       check_mode: false
       run_once: true
+
+    - name: Create user node_exporter
+      become: true
+      shell: useradd --no-create-home --shell /bin/false node_exporter
+      ignore_errors: yes
+
+    - name: Copy node_exporter binary to /usr/bin
+      become: true
+      shell: cp /tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter /usr/local/bin
+
+    - name: Set user and group
+      become: true
+      shell: chown node_exporter:node_exporter /usr/local/bin/node_exporter
+
+    - name: Create system service node_exporter
+      become: true
+      copy:
+        src: template/node_exporter.service
+        dest: /etc/systemd/system
+        owner: root
+        group: root
+
+    - name: Reload node_exporter service
+      systemd:
+        name: node_exporter
+        state: reloaded
+        daemon-reload: yes
+
+    - name: Enable node_exporter service
+      systemd:
+        name: node_exporter
+        enabled: true
+
+    - name: Start node_exporter service
+      systemd:
+        name: node_exporter
+        state: started
