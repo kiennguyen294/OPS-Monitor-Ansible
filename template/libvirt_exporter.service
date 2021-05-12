@@ -1,0 +1,12 @@
+[Unit]
+Description=libvirt-exporter service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/libvirt-exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,47 @@
+---
+- hosts: server_libvirt_exporter
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+ 
+    - name: add user libvirt_exporter
+      become: true
+      user:
+        name: libvirt_exporter
+        shell: /bin/false
+
+    - name: Copy libvirt_exporter binary
+      become: true
+      copy:
+        src: template/libvirt-exporter
+        dest: /usr/local/bin
+        owner: libvirt_exporter
+        group: libvirt_exporter
+        mode: 0777
+
+    - name: Create system service libvirt_exporter
+      become: true
+      copy:
+        src: template/libvirt_exporter.service
+        dest: /etc/systemd/system
+        owner: root
+        group: root
+
+    - name: Reload libvirt_exporter service
+      systemd:
+        name: libvirt_exporter
+        state: reloaded
+        daemon-reload: yes
+
+    - name: Enable libvirt_exporter service
+      systemd:
+        name: libvirt_exporter
+        enabled: true
+
+    - name: Start libvirt_exporter service
+      systemd:
+        name: libvirt_exporter
+        state: started
+
