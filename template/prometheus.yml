@@ -24,3 +24,159 @@ scrape_configs:
 
     static_configs:
     - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+
+      - targets: ['10.120.128.5:9100']
+        labels:
+          instance: compute-01
+
+      - targets: ['10.120.128.6:9100']
+        labels:
+          instance: compute-02
+
+      - targets: ['10.120.128.7:9100']
+        labels:
+          instance: compute-03
+      
+      - targets: ['10.120.128.8:9100']
+        labels:
+          instance: compute-04
+
+      - targets: ['10.120.128.9:9100']
+        labels:
+          instance: compute-05
+
+      - targets: ['10.120.128.10:9100']
+        labels:
+          instance: compute-06
+
+      - targets: ['10.120.128.11:9100']
+        labels:
+          instance: compute-07
+
+      - targets: ['10.120.128.12:9100']
+        labels:
+          instance: compute-08
+
+      - targets: ['10.120.128.13:9100']
+        labels:
+          instance: compute-09
+
+      - targets: ['10.120.128.14:9100']
+        labels:
+          instance: compute-010
+
+      - targets: ['10.120.128.15:9100']
+        labels:
+          instance: compute-011
+
+      - targets: ['10.120.128.16:9100']
+        labels:
+          instance: compute-012
+
+      - targets: ['10.120.128.17:9100']
+        labels:
+          instance: compute-013
+
+      - targets: ['10.120.128.18:9100']
+        labels:
+          instance: compute-014
+
+      - targets: ['10.120.128.19:9100']
+        labels:
+          instance: compute-015
+
+      - targets: ['10.120.128.21:9100']
+        labels:
+          instance: compute-016
+
+      - targets: ['10.120.128.22:9100']
+        labels:
+          instance: compute-017
+
+      - targets: ['10.120.128.23:9100']
+        labels:
+          instance: compute-018
+
+      - targets: ['10.120.128.25:9100']
+        labels:
+          instance: compute-019
+
+      - targets: ['10.120.128.26:9100']
+        labels:
+          instance: compute-020
+
+      - targets: ['10.120.128.27:9100']
+        labels:
+          instance: compute-021
+
+      - targets: ['10.120.128.29:9100']
+        labels:
+          instance: compute-022
+
+      - targets: ['10.120.128.30:9100']
+        labels:
+          instance: compute-023
+
+      - targets: ['10.120.128.31:9100']
+        labels:
+          instance: compute-024
+
+      - targets: ['10.120.128.32:9100']
+        labels:
+          instance: compute-025
+
+      - targets: ['10.120.128.33:9100']
+        labels:
+          instance: compute-026
+
+      - targets: ['10.120.128.34:9100']
+        labels:
+          instance: compute-027
+
+      - targets: ['10.120.128.35:9100']
+        labels:
+          instance: compute-028
+
+      - targets: ['10.120.128.36:9100']
+        labels:
+          instance: compute-029
+
+      - targets: ['10.120.128.37:9100']
+        labels:
+          instance: compute-030
+
+      - targets: ['10.120.128.38:9100']
+        labels:
+          instance: compute-031
+
+      - targets: ['10.120.128.39:9100']
+        labels:
+          instance: compute-032
+
+      - targets: ['10.120.128.40:9100']
+        labels:
+          instance: compute-033
+
+      - targets: ['10.120.128.41:9100']
+        labels:
+          instance: compute-034
+
+      - targets: ['10.120.128.42:9100']
+        labels:
+          instance: compute-035
+
+      - targets: ['10.120.128.1:9100']
+        labels:
+          instance: controller-01
+
+      - targets: ['10.120.128.2:9100']
+        labels:
+          instance: controller-02
+
+      - targets: ['10.120.128.1:9100']
+        labels:
+          instance: controller-03
+

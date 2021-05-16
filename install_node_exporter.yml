@@ -30,10 +30,14 @@
         group: root
 
     - name: Reload node_exporter service
-      systemd:
-        name: node_exporter
-        state: reloaded
-        daemon-reload: yes
+      become: true
+      become_user: root
+      shell: systemctl daemon-reload
+      # systemd:
+      #   name: node_exporter
+      #   state: reloaded
+      #   daemon-reload: yes
+      #   ignore_errors: yes 
 
     - name: Enable node_exporter service
       systemd:
@@ -45,3 +49,7 @@
         name: node_exporter
         state: started
 
+    - name: Restart service
+      systemd:
+        name: node_exporter
+        state: restarted

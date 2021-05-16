@@ -29,11 +29,10 @@
         owner: root
         group: root
 
-    - name: Reload libvirt_exporter service
-      systemd:
-        name: libvirt_exporter
-        state: reloaded
-        daemon-reload: yes
+    - name: Reload node_exporter service
+      become: true
+      become_user: root
+      shell: systemctl daemon-reload
 
     - name: Enable libvirt_exporter service
       systemd:

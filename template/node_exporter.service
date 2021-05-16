@@ -7,7 +7,7 @@ After=network-online.target
 User=node_exporter
 Group=node_exporter
 Type=simple
-ExecStart=/usr/local/bin/node_exporter --collector.disable-defaults --collector.bonding --collector.conntrack  --collector.cpu --collector.loadavg --collector.meminfo --collector.netstat --collector.diskstats
+ExecStart=/usr/local/bin/node_exporter --collector.disable-defaults --collector.bonding  --collector.filesystem --collector.conntrack  --collector.cpu --collector.loadavg --collector.meminfo --collector.netstat --collector.diskstats --collector.netclass --collector.netdev
 
 [Install]
 WantedBy=multi-user.target
