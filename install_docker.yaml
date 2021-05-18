@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: servers_prometheus
   become: true
   vars_files:
     - vars/default.yml
