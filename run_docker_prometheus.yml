@@ -30,4 +30,10 @@
     - name: Run container prometheus
       become: true
       become_user: root
-      shell: docker run -d --restart always -p 9090:9090 -itd -v /root/prometheus-config:/etc/prometheus -v /root/prometheus-data:/prometheus prom/prometheus
+      shell: docker run -d --restart always -p 9090:9090 -itd \
+      -v /root/prometheus-config:/etc/prometheus \
+      -v /root/prometheus-data:/prometheus prom/prometheus \
+      --storage.tsdb.retention.time=45d \
+      --config.file=/etc/prometheus/prometheus.yml \
+      --web.enable-lifecycle \
+      --storage.tsdb.path=/prometheus
