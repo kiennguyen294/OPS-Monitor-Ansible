@@ -1,0 +1,13 @@
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter --collector.disable-defaults --collector.bonding  --collector.filesystem --collector.conntrack  --collector.cpu --collector.loadavg --collector.meminfo --collector.netstat --collector.diskstats --collector.netclass --collector.netdev --web.listen-address={{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:9100
+
+[Install]
+WantedBy=multi-user.target

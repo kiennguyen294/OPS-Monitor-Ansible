@@ -6,20 +6,20 @@
 
   tasks:
  
-    - name: add user node_exporter
-      become: true
-      user:
-        name: node_exporter
-        shell: /bin/false
-
-    - name: Copy node_exporter binary
-      become: true
-      copy:
-        src: template/node_exporter
-        dest: /usr/local/bin
-        owner: node_exporter
-        group: node_exporter
-        mode: 0777
+#    - name: add user node_exporter
+#      become: true
+#      user:
+#        name: node_exporter
+#        shell: /bin/false
+#
+#    - name: Copy node_exporter binary
+#      become: true
+#      copy:
+#        src: template/node_exporter
+#        dest: /usr/local/bin
+#        owner: node_exporter
+#        group: node_exporter
+#        mode: 0777
 
     - name: Create system service node_exporter
       become: true
@@ -33,11 +33,6 @@
       become: true
       become_user: root
       shell: systemctl daemon-reload
-      # systemd:
-      #   name: node_exporter
-      #   state: reloaded
-      #   daemon-reload: yes
-      #   ignore_errors: yes 
 
     - name: Enable node_exporter service
       systemd:

@@ -5,18 +5,18 @@
     - vars/default.yml
 
   tasks:
-    - name: Install aptitude using apt
-      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+#    - name: Install aptitude using apt
+#      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
     - name: Create folder prometheus-config
       file:
-        path: /root/prometheus-config
+        path: /data/prometheus-config
         owner: root
         group: root
         state: directory
 
     - name: Create folder prometheus-data
       file:
-        path: /root/prometheus-data
+        path: /data/prometheus-data
         owner: root
         group: root
         mode: 0777
@@ -25,15 +25,15 @@
     - name: Copy prometheus config template
       copy:
         src: template/prometheus.yml
-        dest: /root/prometheus-config
+        dest: /data/prometheus-config
 
     - name: Run container prometheus
       become: true
       become_user: root
-      shell: docker run -d --restart always -p 9090:9090 -itd \
-      -v /root/prometheus-config:/etc/prometheus \
-      -v /root/prometheus-data:/prometheus prom/prometheus \
+      shell: 'docker run -d --restart always -p 9090:9090 -itd \
+      -v /data/prometheus-config:/etc/prometheus \
+      -v /data/prometheus-data:/prometheus prom/prometheus \
       --storage.tsdb.retention.time=45d \
       --config.file=/etc/prometheus/prometheus.yml \
       --web.enable-lifecycle \
-      --storage.tsdb.path=/prometheus
+      --storage.tsdb.path=/prometheus'

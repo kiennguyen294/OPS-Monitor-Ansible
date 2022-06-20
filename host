@@ -1,15 +1,6 @@
 [servers_prometheus]
-prometheus1 ansible_host=10.120.128.108
-prometheus2 ansible_host=10.120.128.109
-
-[server_grafana]
-#grafana ansible_host=10.120.128.107
-
-[server_node_exporter]
-
-[server_libvirt_exporter]
+prometheus1 ansible_host=192.168.3.3
+#prometheus2 ansible_host=10
 
 [all:vars]
 ansible_connection=ssh
-ansible_user=root
-#ansible_ssh_pass=****

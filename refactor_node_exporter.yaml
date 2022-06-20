@@ -1,0 +1,42 @@
+- hosts: server_node_exporter
+  tasks:
+    - name: ipinfy
+      ipify_facts:
+    
+    - name: refactor node exporter
+      become: true
+      template:
+        src: template/node_exporter.service.j2
+        dest: /etc/systemd/system/node_exporter.service
+        owner: root
+        group: root
+
+    - name: Reload node_exporter service
+      become: true
+      become_user: root
+      shell: systemctl daemon-reload
+
+#    - name: Enable node_exporter service
+#      systemd:
+#        name: node_exporter
+#        enabled: true
+
+#    - name: Start node_exporter service
+#      systemd:
+#        name: node_exporter
+#        state: started
+
+    - name: Restart service
+      become: true
+      become_user: root
+      shell: systemctl restart node_exporter
+     # systemd:
+     #   name: node_exporter
+     #   state: restarted
+    - name: Enable node_exporter service
+      become: true
+      become_user: root
+      shell: systemctl enable node_exporter
+      #systemd:
+      #  name: node_exporter
+      #  enabled: true
